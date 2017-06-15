@@ -1,6 +1,8 @@
 package com.yurich.discoverviewfromsnapchat
 
-import android.content.Context
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -16,4 +18,8 @@ fun ImageView.load() {
     Glide.with(context)
             .load("http://lorempixel.com/$width/$height/")
             .into(this)
+}
+
+fun <T> LiveData<T>.observe(lifecycleOwner: LifecycleOwner, observer: (T?) -> Unit) {
+    this.observe(lifecycleOwner, Observer(observer))
 }
